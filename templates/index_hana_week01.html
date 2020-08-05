@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Webpage Title -->
+    <title>나홀로 쇼핑몰</title>
+
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&display=swap" rel="stylesheet">
+
+    <style type="text/css">
+
+        .info {
+            font-family: 'Nanum Myeongjo', serif;
+        }
+
+        .input-group-prepend {
+            font-family: 'Stylish', sans-serif;
+        }
+
+        .custom-select {
+            font-family: 'Stylish', sans-serif;
+        }
+
+        .wrap {
+            width: 500px;
+            margin: auto;
+        }
+
+        .img {
+            background-image: url('https://cdn.pixabay.com/photo/2016/09/27/16/22/reading-1698771_960_720.jpg');
+            background-size: cover;
+            background-position: center;
+            width: 500px;
+            height: 300px;
+        }
+
+        h1, h5 {
+            display: inline;
+        }
+
+        .info {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .order {
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: forestgreen;
+            border-color: olivedrab;
+        }
+
+    </style>
+
+    <script>
+        var title = '주문이 완료되었습니다.';
+
+        function noti() {
+            alert(title);
+        }
+    </script>
+
+</head>
+
+
+<body>
+
+<div class="wrap">
+
+    <div class="img">
+    </div>
+
+    <div class="info">
+        <h1>쉼을 팝니다</h1>
+        <h5>가격: 100,000원/하루</h5>
+        <hr color="green">
+        <p>온전한 쉼으로 더욱 활기찬 내일을 만들어보세요.(최대 7일까지 선택가능)</p>
+        <hr color="green">
+    </div>
+
+    <div class="info">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">이름</span>
+            </div>
+            <input type="text" class="form-control" id="order-name" aria-describedby="basic-addon3">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="order-count">수량</label>
+            </div>
+
+            <select class="custom-select" id="order-count">
+                <option selected value=""> -- 수량을 선택하세요 --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">주소</span>
+            </div>
+            <input type="text" class="form-control" id="order-address" aria-describedby="basic-addon3">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">전화번호</span>
+            </div>
+            <input type="text" class="form-control" id="order-phone" aria-describedby="basic-addon3">
+        </div>
+
+        <div class="order">
+            <button onclick="noti()" type="button" class="btn btn-primary">쉼 주문하기</button>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
