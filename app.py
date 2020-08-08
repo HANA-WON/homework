@@ -37,7 +37,7 @@ def save_order():
 # 주문 목록보기(Read) API
 @app.route('/order', methods=['GET'])
 def view_orders():
-    orders = list(db.homework.find({}, {'_id': 0}))
+    orders = list(db.orders.find({}, {'_id': 0}))
     return jsonify({'result': 'success', 'orders': orders})
 
 

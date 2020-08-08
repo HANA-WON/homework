@@ -69,6 +69,41 @@
     </style>
 
     <script>
+
+        $(document).ready(function () {
+            order_listing();
+
+            function order_listing() {
+                $.ajax({
+                        type: "get",
+                        url: "/order",         //리뷰 앞에 유알엘이 없는 이유는 나자신한테 다시 보낼거라서
+                        data: {},              //데이터 중괄호 안이 중요
+                        //백엔드랑 유알엘, 데이터를 맞춰줘야해. 그래서 두개 열어놓고 작업, 그래야 플라스크가 받을수 있음.
+                        success: function (response) {
+                            var orders = response['orders'];
+                            for (let i = 0; i < orders.length; i++) {
+                                let name = orders[i]['name'];
+                                let count = orders[i]['count'];
+                                let address = orders[i]['address'];
+                                let phone = orders[i]['phone'];
+
+                                let temp_html = `<tr>
+                                    <th scope="row">${name}</th>
+                                    <td>${count}</td>
+                                    <td>${address}</td>
+                                    <td>${phone}</td>
+                                </tr>`
+                                $('#order-box').append(temp_html);
+                            }
+
+                        }
+                    }
+                )
+
+            }
+
+        });
+
         function order() {
             var name = $('#order-name').val();
             var count = $('#order-count').val();
@@ -87,7 +122,7 @@
                 $.ajax({
                     type: "POST",
                     url: "/order",         //리뷰 앞에 유알엘이 없는 이유는 나자신한테 다시 보낼거라서
-                    data: { 'name_give': name, 'count_give': count, 'address_give': address, 'phone_give': phone} ,              //데이터 중괄호 안이 중요
+                    data: {'name_give': name, 'count_give': count, 'address_give': address, 'phone_give': phone},              //데이터 중괄호 안이 중요
                     //백엔드랑 유알엘, 데이터를 맞춰줘야해. 그래서 두개 열어놓고 작업, 그래야 플라스크가 받을수 있음.
 
                     success: function (response) {
@@ -162,6 +197,37 @@
         <div class="order">
             <button onclick="order()" type="button" class="btn btn-primary">주문하기</button>
         </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">이름</th>
+                <th scope="col">수량</th>
+                <th scope="col">주소</th>
+                <th scope="col">전화번호</th>
+            </tr>
+            </thead>
+            <tbody id='order-box'>
+            <tr>
+                <th scope="row">정하나</th>
+                <td>4</td>
+                <td>스파르타</td>
+                <td>0105555555</td>
+            </tr>
+            <tr>
+                <th scope="row">정하나</th>
+                <td>4</td>
+                <td>스파르타</td>
+                <td>0105555555</td>
+            </tr>
+            <tr>
+                <th scope="row">정하나</th>
+                <td>4</td>
+                <td>스파르타</td>
+                <td>0105555555</td>
+            </tr>
+            </tbody>
+        </table>
 
     </div>
 
