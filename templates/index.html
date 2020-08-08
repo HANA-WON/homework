@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Webpage Title -->
+    <title>나홀로 쇼핑몰</title>
+
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+
+    <!-- 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&display=swap" rel="stylesheet">
+
+    <style type="text/css">
+
+        .info {
+            font-family: 'Nanum Myeongjo', serif;
+        }
+
+        .input-group-prepend {
+            font-family: 'Stylish', sans-serif;
+        }
+
+        .custom-select {
+            font-family: 'Stylish', sans-serif;
+        }
+
+        .wrap {
+            width: 500px;
+            margin: auto;
+        }
+
+        .img {
+            background-image: url('https://cdn.pixabay.com/photo/2016/09/27/16/22/reading-1698771_960_720.jpg');
+            background-size: cover;
+            background-position: center;
+            width: 500px;
+            height: 300px;
+        }
+
+        h1, h5 {
+            display: inline;
+        }
+
+        .info {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .order {
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: forestgreen;
+            border-color: olivedrab;
+        }
+
+    </style>
+
+    <script>
+        function order() {
+            var name = $('#order-name').val();
+            var count = $('#order-count').val();
+            var address = $('#order-address').val();
+            var phone = $('#order-phone').val();
+
+            if (name == '') {
+                alert('이름을 입력하세요!');
+            } else if (count == '') {
+                alert('수량을 입력하세요!');
+            } else if (address == '') {
+                alert('주소를 입력하세요.')
+            } else if (phone == '') {
+                alert('전화번호를 입력하세요.')
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/order",         //리뷰 앞에 유알엘이 없는 이유는 나자신한테 다시 보낼거라서
+                    data: { 'name_give': name, 'count_give': count, 'address_give': address, 'phone_give': phone} ,              //데이터 중괄호 안이 중요
+                    //백엔드랑 유알엘, 데이터를 맞춰줘야해. 그래서 두개 열어놓고 작업, 그래야 플라스크가 받을수 있음.
+
+                    success: function (response) {
+                        if (response["result"] == "success") {
+                            alert(response["msg"]);
+                            window.location.reload();
+                        }
+                    }
+                })
+            }
+        }
+
+    </script>
+
+</head>
+
+
+<body>
+
+<div class="wrap">
+
+    <div class="img">
+    </div>
+
+    <div class="info">
+        <h1>쉼을 팝니다</h1>
+        <h5>가격: 100,000원/하루</h5>
+        <hr color="green">
+        <p>온전한 쉼으로 더욱 활기찬 내일을 만들어보세요.(최대 7일까지 선택가능)</p>
+        <hr color="green">
+    </div>
+
+    <div class="info">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">이름</span>
+            </div>
+            <input type="text" class="form-control" id="order-name" aria-describedby="basic-addon3">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="order-count">수량</label>
+            </div>
+
+            <select class="custom-select" id="order-count">
+                <option selected value=""> -- 수량을 선택하세요 --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">주소</span>
+            </div>
+            <input type="text" class="form-control" id="order-address" aria-describedby="basic-addon3">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">전화번호</span>
+            </div>
+            <input type="text" class="form-control" id="order-phone" aria-describedby="basic-addon3">
+        </div>
+
+        <div class="order">
+            <button onclick="order()" type="button" class="btn btn-primary">주문하기</button>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
